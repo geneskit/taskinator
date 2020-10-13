@@ -100,10 +100,12 @@ var editTask = function(taskId) {
     console.log(taskSelected);
     var taskName = taskSelected.querySelector("h3.task-name").textContent;
 
-    var taskType = taskSelected.querySelector("span.taskType").textContent;
+    var taskType = taskSelected.querySelector("span.task-type").textContent;
 
     document.querySelector("input[name='task-name']").value = taskName;
-    document.querySelector("input[name='task-type']").value = taskName;
+    document.querySelector("select[name='task-type']").value = taskName;
+    document.querySelector("#save-task").textContent = "Save Task";
+    formEl.setAttribute("data-task-id", taskId);
 }
 
 var deleteTask = function(taskId) {

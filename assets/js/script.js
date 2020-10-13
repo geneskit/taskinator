@@ -24,6 +24,8 @@ var createTaskEl = function(taskDataObj) {
     var listItemEl = document.createElement("li");
     listItemEl.className = "task-item";
 
+    listItemEl.setAttribute("data-task-id", taskIdCounter);
+
     var taskInfoEl = document.createElement("div");
     taskInfoEl.className = "task-info";
     taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
@@ -32,8 +34,6 @@ var createTaskEl = function(taskDataObj) {
     var taskActionEl = createTaskActions(taskIdCounter);
     listItemEl.appendChild(taskActionEl);
     
-    tasksToDoEl.appendChild(listItemEl);
-
     tasksToDoEl.appendChild(listItemEl);
     taskIdCounter++;
 }
@@ -61,6 +61,8 @@ var createTaskActions = function(taskId) {
     statusSelectEl.setAttribute("name", "status-change");
     statusSelectEl.setAttribute("data-task-id", taskId);
 
+    actionContainerEl.appendChild(statusSelectEl);
+
     var statusChoices = ["To Do", "In Progress", "Completed"];
     for(var i = 0; i < statusChoices.length; i++) {
         var statusOptionEl = document.createElement("option");
@@ -69,8 +71,6 @@ var createTaskActions = function(taskId) {
 
         statusSelectEl.appendChild(statusOptionEl);
     }
-
-    actionContainerEl.appendChild(statusSelectEl);
 
     return actionContainerEl;
 }
@@ -94,8 +94,10 @@ var taskButtonHandler = function(event) {
 }
 
 var editTask = function(taskId) {
-
+    console.log(taskId);
+    
     var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
+    console.log(taskSelected);
     var taskName = taskSelected.querySelector("h3.task-name").textContent;
 
     var taskType = taskSelected.querySelector("span.taskType").textContent;
